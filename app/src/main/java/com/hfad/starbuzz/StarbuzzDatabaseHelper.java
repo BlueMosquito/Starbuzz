@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class StarbuzzDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "starbuzz";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     StarbuzzDatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -45,7 +45,7 @@ public class StarbuzzDatabaseHelper extends SQLiteOpenHelper {
             insertDrink(db, "Filter", "Our best drip coffee", R.drawable.filter);
         }
         if (oldVersion < 2) {
-//Code to add the extra column
+            db.execSQL("ALRTER TABLE DRINK ADD COLUMN FAVORITE NUMERIC;");
         }
     }
 }
