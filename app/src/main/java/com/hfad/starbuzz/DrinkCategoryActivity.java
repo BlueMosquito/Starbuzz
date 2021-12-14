@@ -2,15 +2,15 @@ package com.hfad.starbuzz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.view.View;
+import android.content.Intent;
 import android.widget.AdapterView;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.ListView;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
@@ -25,7 +25,6 @@ public class DrinkCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drink_category);
 
         ListView listDrinks = (ListView) findViewById(R.id.list_drinks);
-
         SQLiteOpenHelper starbuzzDatabaseHelper = new StarbuzzDatabaseHelper(this);
         try {
             db = starbuzzDatabaseHelper.getReadableDatabase();
@@ -45,15 +44,20 @@ public class DrinkCategoryActivity extends AppCompatActivity {
             toast.show();
         }
 
-        AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> listDrinks, View itemView, int position, long id) {
-                Intent intent = new Intent(DrinkCategoryActivity.this,
-                        DrinkActivity.class);
+        AdapterView.OnItemClickListener itemClickListener =
+                new AdapterView.OnItemClickListener(){
+                    public void onItemClick(AdapterView<?> listDrinks,
+                                            View itemView,
+                                            int position,
+                                            long id) {
+
+                        Intent intent = new Intent(DrinkCategoryActivity.this,
+                                DrinkActivity.class);
                         intent.putExtra(DrinkActivity.EXTRA_DRINKID, (int) id);
                         startActivity(intent);
-            }
-        };
+                    }
+                };
+
         listDrinks.setOnItemClickListener(itemClickListener);
     }
 
